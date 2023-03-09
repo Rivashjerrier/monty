@@ -3,24 +3,21 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
-#include <string.h>
 #include <fcntl.h>
 #include <ctype.h>
 
-#define STACK 1
-#define QUEUE 0
-
 /**
- * struct stack_s - doubly linked list representation of a stack (or queue)
- * @n: integer
- * @prev: points to the previous element of the stack (or queue)
- * @next: points to the next element of the stack (or queue)
+ * struct stack_s - Doubly linked list representation of a stack (or queue).
+ * @n: Integer.
+ * @prev: Points to the previous element of the stack (or queue).
+ * @next: Points to the next element of the stack (or queue).
  *
- * Description: doubly linked list node structure
- * for stack, queues, LIFO, FIFO
+ * Description: Doubly linked list node structure
+ * for stack, queues, LIFO, FIFO Holberton project.
  */
 typedef struct stack_s
 {
@@ -30,12 +27,12 @@ typedef struct stack_s
 } stack_t;
 
 /**
- * struct instruction_s - opcode and its function
- * @opcode: the opcode
- * @f: function to handle the opcode
+ * struct instruction_s - Opcoode and its function.
+ * @opcode: The opcode.
+ * @f: Function to handle the opcode.
  *
- * Description: opcode and its function
- * for stack, queues, LIFO, FIFO
+ * Description: Opcode and its function
+ * for stack, queues, LIFO, FIFO Holberton project.
  */
 typedef struct instruction_s
 {
@@ -44,34 +41,40 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
- * struct globalvar_s - global variable structure
- * @type: Check if stack or queue
- * @file: bytecode file
- * @arg: arguements
- * @op: operation
- * @op_head: head node
- * @op_tail: tail node
- *
- * Description: global variable structure
+ * struct var_struct - Struct for global variable.
+ * @arg: Arguments.
+ * @input_str: Input string.
+ * @SQ: Check for stack or queue.
+ * @file: File descripter.
  */
-typedef struct globalvar_s
+typedef struct var_struct
 {
-	int type;
-	FILE *file;
 	char *arg;
-	char *op;
-	stack_t *op_head;
-	stack_t *op_tail;
-} globalvar_t;
+	char *input_str;
+	int SQ;
+	FILE *file;
+} global_v;
 
-extern globalvar_t gv;
+extern global_v arg_holder;
+global_v arg_holder;
 
-void push(stack_t **stack, unsigned int line_number);
-void pall(stack_t **stack, unsigned int line_number);
-void pint(stack_t **stack, unsigned int line_number);
-void pop(stack_t **stack, unsigned int line_number);
-void swap(stack_t **stack, unsigned int line_number);
-void add(stack_t **stack, unsigned int line_number);
-void nop(stack_t **stack, unsigned int line_number);
+void make_buffer(char *file_name);
+void opcode(char *command, unsigned int line_num, stack_t **stack);
+void free_stack(stack_t **head);
+void push(stack_t **stack, unsigned int line_num);
+void pall(stack_t **stack, unsigned int line_num);
+void pint(stack_t **stack, unsigned int line_num);
+void pop(stack_t **stack, unsigned int line_num);
+void swap(stack_t **stack, unsigned int line_num);
+void add(stack_t **stack, unsigned int line_num);
+void _div(stack_t **stack, unsigned int line_num);
+void mod(stack_t **stack, unsigned int line_num);
+void mul(stack_t **stack, unsigned int line_num);
+void nop(stack_t **stack, unsigned int line_num);
+void sub(stack_t **stack, unsigned int line_num);
+void pchar(stack_t **stack, unsigned int line_num);
+void pstr(stack_t **stack, unsigned int line_num);
+void rotl(stack_t **stack, unsigned int line_num);
+void rotr(stack_t **stack, unsigned int line_num);
 
 #endif
